@@ -28,11 +28,15 @@ While many data scientists default to standard predictive modeling, this project
 
 To handle missing or censored public data thresholds robustly, I implemented a Bayesian Hierarchical Spatial Model (Besag-York-Mollie), accounting for adjacent postal code spatial contiguity. The underlying log-relative risk is modeled as:
 
-$$\eta_i = \alpha + \mathbf{x}_i^\top \boldsymbol{\beta} + u_i + v_i$$
+$$
+\eta_i = \alpha + \mathbf{x}_i^\top \boldsymbol{\beta} + u_i + v_i
+$$
 
 Where $\mathbf{x}_i$ represents local educational and workplace structures, $v_i \sim \mathcal{N}(0, \sigma_v^2)$ captures unstructured regional heterogeneity, and $u_i$ is the spatially structured Conditional Autoregressive (CAR) component defined as:
 
-$$u_i | u_{-i} \sim \mathcal{N}\left( \frac{\sum_{j \sim i} w_{ij} u_j}{\sum_{j \sim i} w_{ij}}, \frac{\sigma_u^2}{\sum_{j \sim i} w_{ij}} \right)$$
+$$
+u_i | u_{-i} \sim \mathcal{N}\left( \frac{\sum_{j \sim i} w_{ij} u_j}{\sum_{j \sim i} w_{ij}}, \frac{\sigma_u^2}{\sum_{j \sim i} w_{ij}} \right)
+$$
 
 **Key Outcomes:**
 
