@@ -6,7 +6,7 @@ description: Data Scientist specializing in advanced statistical modeling, MLOps
 
 # [Your Name]
 
-**Data Scientist | M.Sc. Statistics | Bridging Rigorous Inference & Scalable AI**
+**Data Scientist • M.Sc. Statistics • Bridging Rigorous Inference & Scalable AI**
 
 Welcome to my portfolio. I am a data scientist based in Finland, specializing in advanced statistical modeling, machine learning operations, and agentic AI. My work focuses on transforming complex, high-velocity data into production-ready architectures and actionable strategic insights.
 
