@@ -3,14 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ page.title | default: "My Portfolio" }}</title>
     <meta name="description" content="{{ page.description }}">
     
     <script>
-      MathJax = {
+      window.MathJax = {
         tex: {
           inlineMath: [['$', '$'], ['\\(', '\\)']],
-          displayMath: [['$$', '$$'], ['\\[', '\\]']]
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          processEscapes: true
+        },
+        chtml: {
+          displayAlign: 'center'
         }
       };
     </script>
@@ -47,6 +52,10 @@
         .container {
             max-width: 800px;
             width: 100%;
+            background-color: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
 
         /* Typography */
@@ -72,6 +81,7 @@
         h3 {
             font-size: 1.25rem;
             margin-top: 1.5rem;
+            color: var(--accent-color);
         }
 
         p {
@@ -112,20 +122,21 @@
         /* Blockquotes */
         blockquote {
             border-left: 4px solid var(--accent-color);
-            padding-left: 1rem;
             margin-left: 0;
             margin-bottom: 1.5rem;
             font-style: italic;
             background-color: #f1f8ff;
             padding: 1rem;
-            border-radius: 4px;
+            border-radius: 0 4px 4px 0;
+            color: var(--text-main);
         }
         
-        /* Ensures block equations have some breathing room */
-        .MathJax_Display {
+        /* MathJax Responsive Container */
+        mjx-container[display="true"] {
             margin: 1.5rem 0 !important;
             overflow-x: auto;
             overflow-y: hidden;
+            padding: 0.5rem 0;
         }
 
         /* Footer */
