@@ -5,6 +5,49 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ page.title }}</title>
   
+  <style>
+    /* 1. The background behind the paper */
+    body {
+      background-color: #f4f5f7;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #333;
+      line-height: 1.6;
+      margin: 0;
+      padding: 40px 10px; /* Adds space above and below the page */
+    }
+
+    /* 2. The "A4 Paper" itself */
+    .wrapper {
+      max-width: 800px;         /* Stops the text from stretching too wide */
+      margin: 0 auto;           /* Centers the page on your screen */
+      background-color: #ffffff;/* White background for the document */
+      padding: 60px 80px;       /* The "marginals" (top/bottom and left/right padding) */
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* Gives it a subtle shadow so it pops */
+      border-radius: 4px;       /* Slightly rounded corners */
+    }
+
+    /* 3. Basic styling for your tables, code, and quotes */
+    h1, h2, h3 { color: #111; margin-top: 1.5em; }
+    a { color: #0366d6; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code { background: #f6f8fa; padding: 2px 4px; border-radius: 4px; font-size: 0.9em; }
+    table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+    th, td { border: 1px solid #dfe2e5; padding: 10px 14px; text-align: left; }
+    th { background-color: #f6f8fa; }
+    blockquote { border-left: 4px solid #dfe2e5; margin: 0 0 20px 0; padding-left: 16px; color: #5c6ac4; font-style: italic; }
+
+    /* 4. Make it look good on mobile phones too */
+    @media (max-width: 768px) {
+      .wrapper {
+        padding: 30px 20px; /* Smaller marginals on small screens */
+      }
+      body {
+        padding: 10px 0;
+      }
+    }
+  </style>
+
+  <!-- MathJax Configuration -->
   <script>
     MathJax = {
       tex: {
