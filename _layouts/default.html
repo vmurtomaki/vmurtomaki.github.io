@@ -5,6 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title | default: "My Portfolio" }}</title>
     <meta name="description" content="{{ page.description }}">
+    
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']]
+        }
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
     <style>
         /* CSS Variables for easy color management */
         :root {
@@ -79,7 +90,7 @@
             color: #004494;
         }
 
-        /* Lists & Tables (Added to support your Markdown) */
+        /* Lists & Tables */
         ul {
             margin-bottom: 1rem;
             padding-left: 2rem;
@@ -108,6 +119,13 @@
             background-color: #f1f8ff;
             padding: 1rem;
             border-radius: 4px;
+        }
+        
+        /* Ensures block equations have some breathing room */
+        .MathJax_Display {
+            margin: 1.5rem 0 !important;
+            overflow-x: auto;
+            overflow-y: hidden;
         }
 
         /* Footer */
