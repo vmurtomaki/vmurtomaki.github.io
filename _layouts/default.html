@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
+    <title>{{ page.title | default: "My Portfolio" }}</title>
+    <meta name="description" content="{{ page.description }}">
     <style>
         /* CSS Variables for easy color management */
         :root {
@@ -23,7 +24,6 @@
         }
 
         body {
-            /* Uses the native system font of the user's OS for a modern, clean look */
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             line-height: 1.6;
             color: var(--text-main);
@@ -33,7 +33,6 @@
             padding: 2rem;
         }
 
-        /* Container to restrict width for readability */
         .container {
             max-width: 800px;
             width: 100%;
@@ -48,6 +47,7 @@
         h1 {
             font-size: 2.5rem;
             font-weight: 700;
+            margin-bottom: 1rem;
         }
 
         h2 {
@@ -55,6 +55,12 @@
             margin-top: 2rem;
             border-bottom: 2px solid var(--border-color);
             padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            margin-top: 1.5rem;
         }
 
         p {
@@ -73,53 +79,35 @@
             color: #004494;
         }
 
-        /* Header Section */
-        header {
-            margin-bottom: 3rem;
+        /* Lists & Tables (Added to support your Markdown) */
+        ul {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            color: var(--text-muted);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+        }
+
+        th, td {
             text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid var(--border-color);
         }
 
-        header p {
-            font-size: 1.2rem;
-        }
-
-        .social-links {
-            margin-top: 1rem;
-        }
-        
-        .social-links a {
-            margin-right: 15px;
-            font-weight: 600;
-        }
-
-        /* Sections & Cards */
-        section {
-            margin-bottom: 3rem;
-        }
-
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-
-        .project-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 1.5rem;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .project-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        }
-
-        .project-card h3 {
-            font-size: 1.25rem;
-            margin-bottom: 0.5rem;
+        /* Blockquotes */
+        blockquote {
+            border-left: 4px solid var(--accent-color);
+            padding-left: 1rem;
+            margin-left: 0;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            background-color: #f1f8ff;
+            padding: 1rem;
+            border-radius: 4px;
         }
 
         /* Footer */
@@ -135,41 +123,12 @@
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>Hello, World! 👋</h1>
-            <p>Welcome to my brand new GitHub Pages portfolio.</p>
-            <div class="social-links">
-                <a href="https://github.com/yourusername" target="_blank">GitHub</a> 
-                <a href="https://linkedin.com/in/yourusername" target="_blank">LinkedIn</a> 
-                <a href="mailto:your.email@example.com">Email</a>
-            </div>
-        </header>
-
         <main>
-            <section id="about">
-                <h2>About Me</h2>
-                <p>I am a software developer passionate about building clean, efficient, and user-friendly applications. I enjoy turning complex problems into simple, intuitive designs.</p>
-            </section>
-
-            <section id="projects">
-                <h2>Featured Projects</h2>
-                <div class="project-grid">
-                    <div class="project-card">
-                        <h3>Project One</h3>
-                        <p>A brief description of what this project does, the technologies used, and the problem it solves.</p>
-                        <a href="#">View Code →</a>
-                    </div>
-                    <div class="project-card">
-                        <h3>Project Two</h3>
-                        <p>A brief description of what this project does, the technologies used, and the problem it solves.</p>
-                        <a href="#">View Code →</a>
-                    </div>
-                </div>
-            </section>
+            {{ content }}
         </main>
 
         <footer>
-            <p>© 2026 Your Name. Built with HTML & CSS.</p>
+            <p>© 2026 Your Name. Built with Jekyll, Markdown, HTML & CSS.</p>
         </footer>
     </div>
 </body>
