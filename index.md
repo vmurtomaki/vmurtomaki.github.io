@@ -1,11 +1,19 @@
+---
+layout: default
+title: Portfolio | [Your Name]
+description: Data Scientist specializing in advanced statistical modeling, MLOps, and agentic AI.
+---
+
 # [Your Name]
 
 **Data Scientist | M.Sc. Statistics | Bridging Rigorous Inference & Scalable AI**
 
 Welcome to my portfolio. I am a data scientist based in Finland, specializing in advanced statistical modeling, machine learning operations, and agentic AI. My work focuses on transforming complex, high-velocity data into production-ready architectures and actionable strategic insights.
 
-**Tech Stack:** Python, R, SQL, LangGraph, `llama.cpp`, Docker, MQTT, REST APIs
-**Interests:** Spatial Econometrics, Maritime Logistics Optimization, Edge AI
+| Category | Details |
+| :--- | :--- |
+| **Tech Stack** | Python, R, SQL, LangGraph, `llama.cpp`, Docker, MQTT, REST APIs |
+| **Interests** | Spatial Econometrics, Maritime Logistics Optimization, Edge AI |
 
 ---
 
@@ -13,8 +21,8 @@ Welcome to my portfolio. I am a data scientist based in Finland, specializing in
 
 ### 1. Spatio-Temporal Modeling of Regional Economic Vitality
 
-**Focus:** Bayesian Inference, Spatial Econometrics, Open Data Engineering
-**Tools:** R/Python, PXWEB API, INLA/Stan, GeoPandas
+* **Focus:** Bayesian Inference, Spatial Econometrics, Open Data Engineering
+* **Tools:** R/Python, PXWEB API, INLA/Stan, GeoPandas
 
 While many data scientists default to standard predictive modeling, this project highlights my foundation in mathematical statistics. Utilizing the PAAVO database from Statistics Finland (extracted programmatically via the PXWEB API), I engineered a spatial pipeline to analyze the endogenous demographic drivers and spatial spillover effects influencing disposable income across Finnish postal code areas (EUREF-FIN coordinate system).
 
@@ -38,8 +46,8 @@ $$u_i | u_{-i} \sim \mathcal{N}\left( \frac{\sum_{j \sim i} w_{ij} u_j}{\sum_{j 
 
 ### 2. Real-Time Maritime Delay Prediction & MLOps Pipeline
 
-**Focus:** Streaming Data, MLOps, Gradient Boosting, Business Value Optimization
-**Tools:** Python, MQTT WebSockets, LightGBM/XGBoost, MLflow, Docker
+* **Focus:** Streaming Data, MLOps, Gradient Boosting, Business Value Optimization
+* **Tools:** Python, MQTT WebSockets, LightGBM/XGBoost, MLflow, Docker
 
 Tailored to the maritime logistics hub of Southwest Finland, this project proves my ability to build predictive systems that generate immediate operational value. Instead of static CSVs, this architecture ingests live vessel location data via the Fintraffic Digitraffic MQTT WebSocket API, dynamically joining JSON payloads (course, heading, speed) with static ship metadata and sea state estimations.
 
@@ -57,8 +65,8 @@ The model forecasts Estimated Time of Arrival (ETA) deviations to classify the l
 
 ### 3. Autonomous Data Engineering Agent on Constrained Hardware
 
-**Focus:** Agentic Workflows, LLM Quantization, Hardware Optimization
-**Tools:** LangGraph/Smolagents, Qwen 14B (IQ4_XS GGUF), Ollama
+* **Focus:** Agentic Workflows, LLM Quantization, Hardware Optimization
+* **Tools:** LangGraph/Smolagents, Qwen 14B (IQ4_XS GGUF), Ollama
 
 This project addresses the absolute frontier of generative AI: multi-step reasoning and autonomous tool usage deployed entirely locally. Operating under strict hardware constraints (Nvidia RTX 3060 12GB VRAM, 64GB System RAM), I optimized an agentic workflow using 4-bit quantization and strategic VRAM-to-System RAM offloading to maximize context window capabilities without sacrificing token generation speed.
 
