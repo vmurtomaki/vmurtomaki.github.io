@@ -5,15 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Valtteri Murtomäki — Data Scientist & Statistician</title>
 <meta name="description" content="Data Scientist and Statistician working at the intersection of rigorous mathematical modeling and production-grade software engineering.">
-
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
 <style>
   :root{
     --bg:#0B0F14;
@@ -33,11 +30,8 @@
     --sans:'Inter', -apple-system, sans-serif;
     --radius:5px;
   }
-
   *{margin:0;padding:0;box-sizing:border-box;}
-
   html{scroll-behavior:smooth;}
-
   body{
     background:var(--bg);
     color:var(--text);
@@ -48,23 +42,18 @@
       radial-gradient(circle at 15% 0%, rgba(214,169,74,0.05) 0%, transparent 45%),
       radial-gradient(circle at 85% 15%, rgba(90,130,170,0.05) 0%, transparent 40%);
   }
-
   a{color:inherit;text-decoration:none;}
-
   ::selection{background:var(--accent-soft);color:var(--accent);}
-
   :focus-visible{
     outline:2px solid var(--accent);
     outline-offset:3px;
     border-radius:2px;
   }
-
   .wrap{
     max-width:1080px;
     margin:0 auto;
     padding:0 24px;
   }
-
   .eyebrow{
     font-family:var(--mono);
     font-size:12px;
@@ -81,7 +70,6 @@
     background:var(--accent-dim);
     display:inline-block;
   }
-
   /* ---------- NAV ---------- */
   header{
     position:fixed;
@@ -118,7 +106,6 @@
   .nav-links a:hover{color:var(--accent);}
   .nav-links{display:none;}
   @media(min-width:720px){ .nav-links{display:flex;} }
-
   /* ---------- HERO ---------- */
   .hero{
     position:relative;
@@ -146,14 +133,12 @@
     .hero-curve path{ animation:none; stroke-dashoffset:0; }
   }
   @keyframes draw{ to{ stroke-dashoffset:0; } }
-
   .hero-inner{
     position:relative;
     z-index:1;
     max-width:760px;
   }
   .hero-inner .eyebrow{margin-bottom:22px;}
-
   h1.name{
     font-family:var(--serif);
     font-weight:700;
@@ -163,7 +148,6 @@
     color:var(--text);
     margin-bottom:22px;
   }
-
   .hero-role{
     font-family:var(--mono);
     font-size:14px;
@@ -171,7 +155,6 @@
     margin-bottom:18px;
     letter-spacing:0.02em;
   }
-
   .hero-desc{
     font-size:17px;
     color:var(--text-dim);
@@ -184,9 +167,7 @@
     transition:border-color .15s ease, color .15s ease;
   }
   .hero-desc a:hover{ border-color:var(--accent); color:var(--accent); }
-
   .cta-row{ display:flex; flex-wrap:wrap; gap:12px; }
-
   .btn{
     font-family:var(--mono);
     font-size:13px;
@@ -215,10 +196,8 @@
     background:#E0B65A;
     border-color:#E0B65A;
   }
-
   /* ---------- SECTIONS ---------- */
   section{ padding:100px 0; border-top:1px solid var(--border-soft); }
-
   .section-head{ margin-bottom:52px; max-width:640px; }
   .section-head .eyebrow{ margin-bottom:16px; }
   .section-head h2{
@@ -232,7 +211,6 @@
     margin-top:12px;
     font-size:15px;
   }
-
   /* ---------- SKILLS ---------- */
   .skills-grid{
     display:grid;
@@ -280,10 +258,8 @@
     transition:border-color .15s ease, color .15s ease;
   }
   .chip:hover{ border-color:var(--accent-dim); color:var(--text); }
-
   /* ---------- PROJECTS ---------- */
   .project-list{ display:flex; flex-direction:column; gap:20px; }
-
   .project-card{
     background:var(--surface);
     border:1px solid var(--border);
@@ -296,12 +272,18 @@
     transform:translateY(-2px);
     box-shadow:0 12px 32px -18px rgba(214,169,74,0.25);
   }
-
   .project-top{
     display:flex;
     align-items:baseline;
     gap:14px;
     margin-bottom:6px;
+    flex-wrap:wrap;
+    justify-content:space-between;
+  }
+  .project-top-left{
+    display:flex;
+    align-items:baseline;
+    gap:14px;
     flex-wrap:wrap;
   }
   .project-id{
@@ -319,7 +301,23 @@
     font-size:1.4rem;
     color:var(--text);
   }
-
+  .repo-link{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--text-dim);
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    border:1px solid var(--border);
+    padding:5px 12px;
+    border-radius:100px;
+    transition:all .15s ease;
+    white-space:nowrap;
+  }
+  .repo-link:hover{
+    color:var(--accent);
+    border-color:var(--accent-dim);
+  }
   .stack-row{
     display:flex;
     flex-wrap:wrap;
@@ -335,7 +333,6 @@
     border-radius:4px;
     background:var(--bg-alt);
   }
-
   .value-callout{
     font-family:var(--serif);
     font-style:italic;
@@ -346,7 +343,6 @@
     margin-bottom:22px;
     color:#D7DEE6;
   }
-
   .project-card ul{
     list-style:none;
     display:flex;
@@ -366,7 +362,6 @@
     color:var(--accent-dim);
     font-size:13px;
   }
-
   /* ---------- FOOTER ---------- */
   footer{
     border-top:1px solid var(--border-soft);
@@ -400,7 +395,6 @@
 </style>
 </head>
 <body>
-
 <header>
   <nav>
     <div class="logo">[VM]<span>_</span></div>
@@ -411,7 +405,6 @@
     </div>
   </nav>
 </header>
-
 <!-- ============ HERO ============ -->
 <section class="hero" style="border-top:none;">
   <svg class="hero-curve" viewBox="0 0 1080 500" preserveAspectRatio="none" aria-hidden="true">
@@ -427,7 +420,6 @@
     <path d="M0,340 C60,335 90,330 120,332 C160,335 190,300 210,260 C230,220 245,150 260,120 C275,90 290,80 305,95 C320,110 335,180 350,230 C365,270 380,290 400,295 C430,300 460,296 490,285 C520,274 545,255 565,235 C585,215 600,205 615,215 C635,230 650,290 665,340 C680,385 695,400 715,395 C740,388 760,350 780,320 C805,285 825,270 850,275 C880,282 905,310 930,320 C955,330 980,325 1005,315 C1030,305 1055,300 1080,302"
       fill="none" stroke="url(#curveFade)" stroke-width="1.5" stroke-linecap="round"/>
   </svg>
-
   <div class="wrap hero-inner">
     <div class="eyebrow">status: production &nbsp;//&nbsp; typed · tested · containerized</div>
     <h1 class="name">Valtteri Murtomäki</h1>
@@ -440,12 +432,11 @@
       <a href="https://github.com/vmurtomaki" target="_blank" rel="noopener">GitHub</a>.
     </p>
     <div class="cta-row">
-      <a class="btn primary" href="https://github.com/vmurtomaki/" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>
+      <a class="btn primary" href="https://github.com/vmurtomaki" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>
       <a class="btn" href="mailto:valtteri.murtomaki@outlook.com"><i class="fa-solid fa-envelope"></i> Email</a>
     </div>
   </div>
 </section>
-
 <!-- ============ SKILLS ============ -->
 <section id="skills">
   <div class="wrap">
@@ -454,7 +445,6 @@
       <h2>Skills Matrix</h2>
       <p>The stack spans statistical theory, applied machine learning, and the engineering discipline needed to ship both reliably.</p>
     </div>
-
     <div class="skills-grid">
       <div class="skill-card">
         <h3>Mathematics &amp; Statistics</h3>
@@ -477,7 +467,6 @@
           <span class="chip">Omitted Variable Bias Analysis</span>
         </div>
       </div>
-
       <div class="skill-card">
         <h3>Machine Learning</h3>
         <div class="chip-row">
@@ -485,13 +474,10 @@
           <span class="chip">Scikit-learn</span>
           <span class="chip">Random Forest</span>
           <span class="chip">MAPIE</span>
-          <span class="chip">Scanpy / AnnData</span>
-          <span class="chip">Spatial Transcriptomics</span>
           <span class="chip">RandomizedSearchCV</span>
           <span class="chip">TimeSeriesSplit</span>
         </div>
       </div>
-
       <div class="skill-card">
         <h3>DevOps &amp; Engineering</h3>
         <div class="chip-row">
@@ -504,12 +490,11 @@
           <span class="chip">Reproducible Pipelines</span>
         </div>
       </div>
-
       <div class="skill-card">
         <h3>Languages &amp; Frameworks</h3>
         <div class="chip-row">
           <span class="chip">Python</span>
-          <span class="chip">R (rpy2)</span>
+          <span class="chip">R</span>
           <span class="chip">Streamlit</span>
           <span class="chip">Plotly</span>
           <span class="chip">Pandas</span>
@@ -520,23 +505,23 @@
     </div>
   </div>
 </section>
-
 <!-- ============ PROJECTS ============ -->
 <section id="projects">
   <div class="wrap">
     <div class="section-head">
       <div class="eyebrow">// case studies</div>
       <h2>Selected Work</h2>
-      <p>Four production systems spanning causal inference, uncertainty quantification, tail-risk forecasting, and spatial biology.</p>
+      <p>Three production systems spanning causal inference, uncertainty quantification, and tail-risk forecasting.</p>
     </div>
-
     <div class="project-list">
-
       <!-- Project 1 -->
       <article class="project-card">
         <div class="project-top">
-          <span class="project-id">P01</span>
-          <h3>Causal Pricing Engine</h3>
+          <div class="project-top-left">
+            <span class="project-id">P01</span>
+            <h3>Causal Pricing Engine</h3>
+          </div>
+          <a class="repo-link" href="https://github.com/vmurtomaki/causal_inference" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> View repo</a>
         </div>
         <div class="stack-row">
           <span class="badge">Python</span><span class="badge">DoubleML</span>
@@ -554,12 +539,14 @@
           <li>Architected a strictly typed <code>src/</code> layout with deterministic uv locking, Ruff/MyPy CI gates, and a Streamlit scenario simulator serving live pipeline artifacts.</li>
         </ul>
       </article>
-
       <!-- Project 2 -->
       <article class="project-card">
         <div class="project-top">
-          <span class="project-id">P02</span>
-          <h3>Adaptive Conformal Forecasting</h3>
+          <div class="project-top-left">
+            <span class="project-id">P02</span>
+            <h3>Adaptive Conformal Forecasting</h3>
+          </div>
+          <a class="repo-link" href="https://github.com/vmurtomaki/conformal-prediction-project" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> View repo</a>
         </div>
         <div class="stack-row">
           <span class="badge">Python</span><span class="badge">MAPIE</span>
@@ -574,15 +561,17 @@
         <ul>
           <li>Implemented EnbPI with block-bootstrap residuals to preserve chronological exchangeability where standard conformal methods break down on time series.</li>
           <li>Corrected a coarse-grained Adaptive Conformal Inference update to a per-timestep Gibbs &amp; Candes formulation, restoring true reactivity to regime shifts and shocks.</li>
-          <li>Containerized the full inference stack with Docker and validated it end-to-end via a PowerShell smoke-test harness covering builds, health checks, and live serving.</li>
+          <li>Containerized the full inference stack with Docker and validated it end-to-end via an automated smoke-test script covering builds, health checks, and live serving.</li>
         </ul>
       </article>
-
       <!-- Project 3 -->
       <article class="project-card">
         <div class="project-top">
-          <span class="project-id">P03</span>
-          <h3>GARCH-EVT Risk Engine</h3>
+          <div class="project-top-left">
+            <span class="project-id">P03</span>
+            <h3>GARCH-EVT Risk Engine</h3>
+          </div>
+          <a class="repo-link" href="https://github.com/vmurtomaki/evt-nordic-energy-risk" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> View repo</a>
         </div>
         <div class="stack-row">
           <span class="badge">Python</span><span class="badge">arch</span>
@@ -599,34 +588,9 @@
           <li>Diagnosed and fixed a zero-violation Kupiec test bypass and removed a statistically indefensible pass/fail heuristic, replacing both with closed-form, peer-reviewed test statistics.</li>
         </ul>
       </article>
-
-      <!-- Project 4 -->
-      <article class="project-card">
-        <div class="project-top">
-          <span class="project-id">P04</span>
-          <h3>Spatial Multi-Omics Integration</h3>
-        </div>
-        <div class="stack-row">
-          <span class="badge">Python</span><span class="badge">R</span>
-          <span class="badge">Scanpy</span><span class="badge">rpy2</span>
-          <span class="badge">Docker</span><span class="badge">Streamlit</span>
-        </div>
-        <p class="value-callout">
-          Maps predicted cell-state probabilities directly onto tumor histology images, giving researchers an
-          interactive tool to localize invasive cell populations and accelerate hypothesis generation by
-          <!-- TODO: insert metric -->[Insert % metric].
-        </p>
-        <ul>
-          <li>Built a polyglot Python/R integration bridge (rpy2) to orchestrate Iterative Clustering Projection against 10x Genomics Visium spatial transcriptomics data.</li>
-          <li>Engineered a QC and normalization pipeline with mitochondrial filtering and highly-variable-gene selection to safeguard downstream differential expression validity.</li>
-          <li>Shipped a multi-stage Docker build coupling a frozen R runtime with uv-managed Python dependencies, gated behind a Makefile artifact-dependency check for reproducible deployment.</li>
-        </ul>
-      </article>
-
     </div>
   </div>
 </section>
-
 <!-- ============ FOOTER / CONTACT ============ -->
 <footer id="contact">
   <div class="wrap footer-inner">
@@ -640,10 +604,8 @@
     </div>
   </div>
 </footer>
-
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 </script>
-
 </body>
 </html>
