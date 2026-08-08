@@ -430,7 +430,7 @@
 
   <div class="wrap hero-inner">
     <div class="eyebrow">status: production &nbsp;//&nbsp; typed · tested · containerized</div>
-    <h1 class="name"><!-- TODO: replace with your full name -->[Your Name]</h1>
+    <h1 class="name"><Valtteri Murtomäki</h1>
     <div class="hero-role">Data Scientist &amp; Statistician</div>
     <p class="hero-desc">
       Builds where rigorous mathematical modeling meets production-grade software
