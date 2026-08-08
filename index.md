@@ -440,9 +440,8 @@
       <a href="[GitHub URL]" target="_blank" rel="noopener">GitHub</a>.
     </p>
     <div class="cta-row">
-      <a class="btn primary" href="[GitHub URL]" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>
-      <a class="btn" href="[LinkedIn URL]" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i> LinkedIn</a>
-      <a class="btn" href="mailto:[your@email.com]"><i class="fa-solid fa-envelope"></i> Email</a>
+      <a class="btn primary" href="https://github.com/vmurtomaki/" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>
+      <a class="btn" href="mailto:valtteri.murtomaki@outlook.com"><i class="fa-solid fa-envelope"></i> Email</a>
     </div>
   </div>
 </section>
