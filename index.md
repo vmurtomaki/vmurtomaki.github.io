@@ -1,91 +1,651 @@
----
-layout: default
-title: Portfolio | [Your Name]
-description: Data Scientist specializing in advanced statistical modeling, MLOps, and agentic AI.
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[Your Name] — Data Scientist & Statistician</title>
+<meta name="description" content="Data Scientist and Statistician working at the intersection of rigorous mathematical modeling and production-grade software engineering.">
 
-# [Your Name]
-.
-**Data Scientist &nbsp; &nbsp; M.Sc. Statistics &nbsp; &nbsp; Bridging Rigorous Inference & Scalable AI**
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-Welcome to my portfolio. I am a data scientist based in Finland, specializing in advanced statistical modeling, machine learning operations, and agentic AI. My work focuses on transforming complex, high-velocity data into production-ready architectures and actionable strategic insights.
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-| Category | Details |
-| :--- | :--- |
-| **Tech Stack** | Python, R, SQL, LangGraph, `llama.cpp`, Docker, MQTT, REST APIs |
-| **Interests** | Spatial Econometrics, Maritime Logistics Optimization, Edge AI |
+<style>
+  :root{
+    --bg:#0B0F14;
+    --bg-alt:#0D1218;
+    --surface:#121821;
+    --surface-hover:#161F29;
+    --border:#22303F;
+    --border-soft:#1A2530;
+    --text:#E7EDF3;
+    --text-dim:#8FA0AF;
+    --text-faint:#57677A;
+    --accent:#D6A94A;
+    --accent-dim:#8C7332;
+    --accent-soft:rgba(214,169,74,0.10);
+    --mono:'JetBrains Mono', ui-monospace, monospace;
+    --serif:'Source Serif 4', Georgia, serif;
+    --sans:'Inter', -apple-system, sans-serif;
+    --radius:5px;
+  }
 
----
+  *{margin:0;padding:0;box-sizing:border-box;}
 
-## Portfolio Projects
+  html{scroll-behavior:smooth;}
 
-### 1. Spatio-Temporal Modeling of Regional Economic Vitality
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    background-image:
+      radial-gradient(circle at 15% 0%, rgba(214,169,74,0.05) 0%, transparent 45%),
+      radial-gradient(circle at 85% 15%, rgba(90,130,170,0.05) 0%, transparent 40%);
+  }
 
-* **Focus:** Bayesian Inference, Spatial Econometrics, Open Data Engineering
-* **Tools:** R/Python, PXWEB API, INLA/Stan, GeoPandas
+  a{color:inherit;text-decoration:none;}
 
-While many data scientists default to standard predictive modeling, this project highlights my foundation in mathematical statistics. Utilizing the PAAVO database from Statistics Finland (extracted programmatically via the PXWEB API), I engineered a spatial pipeline to analyze the endogenous demographic drivers and spatial spillover effects influencing disposable income across Finnish postal code areas (EUREF-FIN coordinate system).
+  ::selection{background:var(--accent-soft);color:var(--accent);}
 
-To handle missing or censored public data thresholds robustly, I implemented a Bayesian Hierarchical Spatial Model (Besag-York-Mollie), accounting for adjacent postal code spatial contiguity. The underlying log-relative risk is modeled as:
+  :focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:3px;
+    border-radius:2px;
+  }
 
-$$\eta_i = \alpha + \mathbf{x}_i^\top \boldsymbol{\beta} + u_i + v_i$$
+  .wrap{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 24px;
+  }
 
-Where $\mathbf{x}_i$ represents local educational and workplace structures, $v_i \sim \mathcal{N}(0, \sigma_v^2)$ captures unstructured regional heterogeneity, and $u_i$ is the spatially structured Conditional Autoregressive (CAR) component defined as:
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--accent);
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:16px;height:1px;
+    background:var(--accent-dim);
+    display:inline-block;
+  }
 
-$$u_i | u_{-i} \sim \mathcal{N}\left( \frac{\sum_{j \sim i} w_{ij} u_j}{\sum_{j \sim i} w_{ij}}, \frac{\sigma_u^2}{\sum_{j \sim i} w_{ij}} \right)$$
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed;
+    top:0;left:0;right:0;
+    z-index:100;
+    background:rgba(11,15,20,0.82);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border-soft);
+  }
+  nav{
+    max-width:1080px;
+    margin:0 auto;
+    padding:16px 24px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .logo{
+    font-family:var(--mono);
+    font-size:14px;
+    font-weight:500;
+    color:var(--text);
+    letter-spacing:0.02em;
+  }
+  .logo span{color:var(--accent);}
+  .nav-links{
+    display:flex;
+    gap:32px;
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--text-dim);
+  }
+  .nav-links a{transition:color .15s ease;}
+  .nav-links a:hover{color:var(--accent);}
+  .nav-links{display:none;}
+  @media(min-width:720px){ .nav-links{display:flex;} }
 
-**Key Outcomes:**
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:100svh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:140px 0 80px;
+    overflow:hidden;
+  }
+  .hero-curve{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    z-index:0;
+    opacity:0.55;
+  }
+  .hero-curve path{
+    stroke-dasharray:2400;
+    stroke-dashoffset:2400;
+    animation:draw 2.6s cubic-bezier(.65,0,.35,1) forwards .3s;
+  }
+  @media (prefers-reduced-motion: reduce){
+    .hero-curve path{ animation:none; stroke-dashoffset:0; }
+  }
+  @keyframes draw{ to{ stroke-dashoffset:0; } }
 
-* Demonstrated programmatic extraction and cleaning of hierarchical government datasets.
-* Showcased advanced handling of spatial contiguity matrices and spatio-temporal trends over a 14-year horizon.
-* Delivered rigorous uncertainty quantification far beyond standard machine learning point estimates.
+  .hero-inner{
+    position:relative;
+    z-index:1;
+    max-width:760px;
+  }
+  .hero-inner .eyebrow{margin-bottom:22px;}
 
-> **[View Repository / Read Case Study]** *(Link to be added)*
+  h1.name{
+    font-family:var(--serif);
+    font-weight:700;
+    font-size:clamp(2.6rem, 6vw, 4.4rem);
+    line-height:1.05;
+    letter-spacing:-0.01em;
+    color:var(--text);
+    margin-bottom:22px;
+  }
 
----
+  .hero-role{
+    font-family:var(--mono);
+    font-size:14px;
+    color:var(--accent);
+    margin-bottom:18px;
+    letter-spacing:0.02em;
+  }
 
-### 2. Real-Time Maritime Delay Prediction & MLOps Pipeline
+  .hero-desc{
+    font-size:17px;
+    color:var(--text-dim);
+    max-width:600px;
+    margin-bottom:38px;
+  }
+  .hero-desc a{
+    color:var(--text);
+    border-bottom:1px solid var(--accent-dim);
+    transition:border-color .15s ease, color .15s ease;
+  }
+  .hero-desc a:hover{ border-color:var(--accent); color:var(--accent); }
 
-* **Focus:** Streaming Data, MLOps, Gradient Boosting, Business Value Optimization
-* **Tools:** Python, MQTT WebSockets, LightGBM/XGBoost, MLflow, Docker
+  .cta-row{ display:flex; flex-wrap:wrap; gap:12px; }
 
-Tailored to the maritime logistics hub of Southwest Finland, this project proves my ability to build predictive systems that generate immediate operational value. Instead of static CSVs, this architecture ingests live vessel location data via the Fintraffic Digitraffic MQTT WebSocket API, dynamically joining JSON payloads (course, heading, speed) with static ship metadata and sea state estimations.
+  .btn{
+    font-family:var(--mono);
+    font-size:13px;
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+    padding:11px 20px;
+    border-radius:100px;
+    border:1px solid var(--border);
+    color:var(--text);
+    transition:all .15s ease;
+    background:var(--surface);
+  }
+  .btn:hover{
+    border-color:var(--accent-dim);
+    background:var(--surface-hover);
+    transform:translateY(-1px);
+  }
+  .btn.primary{
+    background:var(--accent);
+    color:#151009;
+    border-color:var(--accent);
+    font-weight:500;
+  }
+  .btn.primary:hover{
+    background:#E0B65A;
+    border-color:#E0B65A;
+  }
 
-The model forecasts Estimated Time of Arrival (ETA) deviations to classify the likelihood of significant port delays. Importantly, the model’s performance is evaluated not just on statistical error (RMSE), but on a custom cost-matrix that translates prediction errors into financial impacts—weighing the cost of prematurely preparing a berth versus the operational friction of a delayed arrival.
+  /* ---------- SECTIONS ---------- */
+  section{ padding:100px 0; border-top:1px solid var(--border-soft); }
 
-**Key Outcomes:**
+  .section-head{ margin-bottom:52px; max-width:640px; }
+  .section-head .eyebrow{ margin-bottom:16px; }
+  .section-head h2{
+    font-family:var(--serif);
+    font-size:clamp(1.8rem,3.4vw,2.4rem);
+    font-weight:600;
+    color:var(--text);
+  }
+  .section-head p{
+    color:var(--text-dim);
+    margin-top:12px;
+    font-size:15px;
+  }
 
-* Engineered a robust streaming data ingestion pipeline for high-velocity telemetry.
-* Packaged the trained Gradient Boosting model as a containerized RESTful API.
-* Implemented experiment logging (MLflow) to demonstrate production readiness and model drift management.
+  /* ---------- SKILLS ---------- */
+  .skills-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:1px;
+    background:var(--border-soft);
+    border:1px solid var(--border-soft);
+    border-radius:var(--radius);
+    overflow:hidden;
+  }
+  @media(min-width:720px){
+    .skills-grid{ grid-template-columns:1fr 1fr; }
+  }
+  .skill-card{
+    background:var(--bg-alt);
+    padding:32px;
+  }
+  .skill-card h3{
+    font-family:var(--mono);
+    font-size:13px;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin-bottom:20px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .skill-card h3::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:var(--border);
+  }
+  .chip-row{ display:flex; flex-wrap:wrap; gap:8px; }
+  .chip{
+    font-family:var(--mono);
+    font-size:12.5px;
+    color:var(--text-dim);
+    background:var(--surface);
+    border:1px solid var(--border);
+    padding:6px 12px;
+    border-radius:100px;
+    line-height:1.3;
+    transition:border-color .15s ease, color .15s ease;
+  }
+  .chip:hover{ border-color:var(--accent-dim); color:var(--text); }
 
-> **[View Repository / Read Case Study]** *(Link to be added)*
+  /* ---------- PROJECTS ---------- */
+  .project-list{ display:flex; flex-direction:column; gap:20px; }
 
----
+  .project-card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:36px;
+    transition:border-color .2s ease, transform .2s ease, box-shadow .2s ease;
+  }
+  .project-card:hover{
+    border-color:var(--accent-dim);
+    transform:translateY(-2px);
+    box-shadow:0 12px 32px -18px rgba(214,169,74,0.25);
+  }
 
-### 3. Autonomous Data Engineering Agent on Constrained Hardware
+  .project-top{
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+    margin-bottom:6px;
+    flex-wrap:wrap;
+  }
+  .project-id{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--accent);
+    background:var(--accent-soft);
+    padding:3px 9px;
+    border-radius:3px;
+    letter-spacing:0.03em;
+  }
+  .project-card h3{
+    font-family:var(--serif);
+    font-weight:700;
+    font-size:1.4rem;
+    color:var(--text);
+  }
 
-* **Focus:** Agentic Workflows, LLM Quantization, Hardware Optimization
-* **Tools:** LangGraph/Smolagents, Qwen 14B (IQ4_XS GGUF), Ollama
+  .stack-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+    margin:16px 0 20px;
+  }
+  .badge{
+    font-family:var(--mono);
+    font-size:11.5px;
+    color:var(--text-dim);
+    border:1px solid var(--border);
+    padding:4px 10px;
+    border-radius:4px;
+    background:var(--bg-alt);
+  }
 
-This project addresses the absolute frontier of generative AI: multi-step reasoning and autonomous tool usage deployed entirely locally. Operating under strict hardware constraints (Nvidia RTX 3060 12GB VRAM, 64GB System RAM), I optimized an agentic workflow using 4-bit quantization and strategic VRAM-to-System RAM offloading to maximize context window capabilities without sacrificing token generation speed.
+  .value-callout{
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:15.5px;
+    color:var(--text);
+    border-left:2px solid var(--accent);
+    padding:4px 0 4px 18px;
+    margin-bottom:22px;
+    color:#D7DEE6;
+  }
 
-Built using LangGraph, the AI acts as an autonomous junior data engineer. The agent is equipped with local tools to scrape endpoint documentation from `opendata.fi`, write data parsing scripts in Python, and execute them in a sandboxed environment. If an execution throws a traceback error, the agent autonomously reads the stack trace, self-corrects the code, and loops until the dataset is successfully compiled and saved.
+  .project-card ul{
+    list-style:none;
+    display:flex;
+    flex-direction:column;
+    gap:11px;
+  }
+  .project-card li{
+    position:relative;
+    padding-left:20px;
+    font-size:14.5px;
+    color:var(--text-dim);
+  }
+  .project-card li::before{
+    content:"▸";
+    position:absolute;
+    left:0;
+    color:var(--accent-dim);
+    font-size:13px;
+  }
 
-**Key Outcomes:**
+  /* ---------- FOOTER ---------- */
+  footer{
+    border-top:1px solid var(--border-soft);
+    padding:56px 0 48px;
+  }
+  .footer-inner{
+    display:flex;
+    flex-direction:column;
+    gap:28px;
+    align-items:center;
+    text-align:center;
+  }
+  @media(min-width:720px){
+    .footer-inner{ flex-direction:row; justify-content:space-between; text-align:left; }
+  }
+  .footer-icons{ display:flex; gap:16px; }
+  .footer-icons a{
+    width:38px;height:38px;
+    display:flex;align-items:center;justify-content:center;
+    border:1px solid var(--border);
+    border-radius:100px;
+    color:var(--text-dim);
+    transition:all .15s ease;
+  }
+  .footer-icons a:hover{ color:var(--accent); border-color:var(--accent-dim); }
+  .footer-note{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--text-faint);
+  }
+</style>
+</head>
+<body>
 
-* Proved deep understanding of LLM memory constraints, Key-Value cache management, and hardware-level quantization (GGUF).
-* Built a stateful, cyclic AI orchestration graph capable of self-healing code execution.
-* Delivered a locally hosted, privacy-preserving alternative to expensive, cloud-based agentic frameworks.
+<header>
+  <nav>
+    <div class="logo">[YN]<span>_</span></div>
+    <div class="nav-links">
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+</header>
 
-> **[View Repository / Read Case Study]** *(Link to be added)*
+<!-- ============ HERO ============ -->
+<section class="hero" style="border-top:none;">
+  <svg class="hero-curve" viewBox="0 0 1080 500" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <linearGradient id="curveFade" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#D6A94A" stop-opacity="0"/>
+        <stop offset="15%" stop-color="#D6A94A" stop-opacity="0.7"/>
+        <stop offset="85%" stop-color="#D6A94A" stop-opacity="0.7"/>
+        <stop offset="100%" stop-color="#D6A94A" stop-opacity="0"/>
+      </linearGradient>
+    </defs>
+    <!-- Asymmetric GJR-GARCH style shock/volatility path -->
+    <path d="M0,340 C60,335 90,330 120,332 C160,335 190,300 210,260 C230,220 245,150 260,120 C275,90 290,80 305,95 C320,110 335,180 350,230 C365,270 380,290 400,295 C430,300 460,296 490,285 C520,274 545,255 565,235 C585,215 600,205 615,215 C635,230 650,290 665,340 C680,385 695,400 715,395 C740,388 760,350 780,320 C805,285 825,270 850,275 C880,282 905,310 930,320 C955,330 980,325 1005,315 C1030,305 1055,300 1080,302"
+      fill="none" stroke="url(#curveFade)" stroke-width="1.5" stroke-linecap="round"/>
+  </svg>
 
----
+  <div class="wrap hero-inner">
+    <div class="eyebrow">status: production &nbsp;//&nbsp; typed · tested · containerized</div>
+    <h1 class="name"><!-- TODO: replace with your full name -->[Your Name]</h1>
+    <div class="hero-role">Data Scientist &amp; Statistician</div>
+    <p class="hero-desc">
+      Builds where rigorous mathematical modeling meets production-grade software
+      engineering. From Double Machine Learning causal estimators to GARCH-EVT
+      tail-risk models, every project ships as a typed, tested, containerized
+      system — not a notebook. Explore the full body of work on
+      <a href="[GitHub URL]" target="_blank" rel="noopener">GitHub</a>.
+    </p>
+    <div class="cta-row">
+      <a class="btn primary" href="[GitHub URL]" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>
+      <a class="btn" href="[LinkedIn URL]" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i> LinkedIn</a>
+      <a class="btn" href="mailto:[your@email.com]"><i class="fa-solid fa-envelope"></i> Email</a>
+    </div>
+  </div>
+</section>
 
-### Let's Connect
+<!-- ============ SKILLS ============ -->
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">// 4 domains</div>
+      <h2>Skills Matrix</h2>
+      <p>The stack spans statistical theory, applied machine learning, and the engineering discipline needed to ship both reliably.</p>
+    </div>
 
-I am currently seeking Data Scientist and Machine Learning Engineering roles in Finland. Let's discuss how my background in statistics and software engineering can drive value for your team.
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h3>Mathematics &amp; Statistics</h3>
+        <div class="chip-row">
+          <span class="chip">Double Machine Learning</span>
+          <span class="chip">Partially Linear Regression</span>
+          <span class="chip">Neyman Orthogonality</span>
+          <span class="chip">Conformal Prediction (EnbPI)</span>
+          <span class="chip">Adaptive Conformal Inference</span>
+          <span class="chip">Block Bootstrapping</span>
+          <span class="chip">Extreme Value Theory</span>
+          <span class="chip">Peaks-Over-Threshold</span>
+          <span class="chip">Generalized Pareto Distribution</span>
+          <span class="chip">GJR-GARCH</span>
+          <span class="chip">Asymmetric Shock Response</span>
+          <span class="chip">Kupiec POF</span>
+          <span class="chip">Christoffersen Independence</span>
+          <span class="chip">Acerbi-Szekely</span>
+          <span class="chip">Causal Inference</span>
+          <span class="chip">Omitted Variable Bias Analysis</span>
+        </div>
+      </div>
 
-* **Email:** [your.email@example.com]
-* **LinkedIn:** [Your LinkedIn Profile]
-* **GitHub:** [Your GitHub Profile]
+      <div class="skill-card">
+        <h3>Machine Learning</h3>
+        <div class="chip-row">
+          <span class="chip">LightGBM</span>
+          <span class="chip">Scikit-learn</span>
+          <span class="chip">Random Forest</span>
+          <span class="chip">MAPIE</span>
+          <span class="chip">Scanpy / AnnData</span>
+          <span class="chip">Spatial Transcriptomics</span>
+          <span class="chip">RandomizedSearchCV</span>
+          <span class="chip">TimeSeriesSplit</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <h3>DevOps &amp; Engineering</h3>
+        <div class="chip-row">
+          <span class="chip">Docker (multi-stage)</span>
+          <span class="chip">uv</span>
+          <span class="chip">Ruff</span>
+          <span class="chip">MyPy (strict)</span>
+          <span class="chip">Pytest</span>
+          <span class="chip">Makefile Orchestration</span>
+          <span class="chip">Reproducible Pipelines</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <h3>Languages &amp; Frameworks</h3>
+        <div class="chip-row">
+          <span class="chip">Python</span>
+          <span class="chip">R (rpy2)</span>
+          <span class="chip">Streamlit</span>
+          <span class="chip">Plotly</span>
+          <span class="chip">Pandas</span>
+          <span class="chip">NumPy</span>
+          <span class="chip">SciPy</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROJECTS ============ -->
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">// case studies</div>
+      <h2>Selected Work</h2>
+      <p>Four production systems spanning causal inference, uncertainty quantification, tail-risk forecasting, and spatial biology.</p>
+    </div>
+
+    <div class="project-list">
+
+      <!-- Project 1 -->
+      <article class="project-card">
+        <div class="project-top">
+          <span class="project-id">P01</span>
+          <h3>Causal Pricing Engine</h3>
+        </div>
+        <div class="stack-row">
+          <span class="badge">Python</span><span class="badge">DoubleML</span>
+          <span class="badge">LightGBM</span><span class="badge">Streamlit</span>
+          <span class="badge">uv</span><span class="badge">Pytest</span><span class="badge">MyPy</span>
+        </div>
+        <p class="value-callout">
+          Identifies the true causal effect of pricing on purchase probability by stripping high-dimensional
+          confounding from observational retail data, improving projected margin capture by
+          <!-- TODO: insert metric -->[Insert % metric].
+        </p>
+        <ul>
+          <li>Engineered a Partially Linear Regression estimator with LightGBM nuisance learners and cross-fitting to recover orthogonal, bias-resistant causal effects.</li>
+          <li>Quantified estimator fragility with Omitted Variable Bias sensitivity bounds, exposing exactly how much unobserved confounding the causal claim could tolerate.</li>
+          <li>Architected a strictly typed <code>src/</code> layout with deterministic uv locking, Ruff/MyPy CI gates, and a Streamlit scenario simulator serving live pipeline artifacts.</li>
+        </ul>
+      </article>
+
+      <!-- Project 2 -->
+      <article class="project-card">
+        <div class="project-top">
+          <span class="project-id">P02</span>
+          <h3>Adaptive Conformal Forecasting</h3>
+        </div>
+        <div class="stack-row">
+          <span class="badge">Python</span><span class="badge">MAPIE</span>
+          <span class="badge">Docker</span><span class="badge">Plotly</span>
+          <span class="badge">uv</span><span class="badge">Pytest</span>
+        </div>
+        <p class="value-callout">
+          Delivers mathematically guaranteed prediction intervals for volatile energy demand series, replacing
+          point forecasts with actionable uncertainty bands that cut over-provisioning costs by
+          <!-- TODO: insert metric -->[Insert % metric].
+        </p>
+        <ul>
+          <li>Implemented EnbPI with block-bootstrap residuals to preserve chronological exchangeability where standard conformal methods break down on time series.</li>
+          <li>Corrected a coarse-grained Adaptive Conformal Inference update to a per-timestep Gibbs &amp; Candes formulation, restoring true reactivity to regime shifts and shocks.</li>
+          <li>Containerized the full inference stack with Docker and validated it end-to-end via a PowerShell smoke-test harness covering builds, health checks, and live serving.</li>
+        </ul>
+      </article>
+
+      <!-- Project 3 -->
+      <article class="project-card">
+        <div class="project-top">
+          <span class="project-id">P03</span>
+          <h3>GARCH-EVT Risk Engine</h3>
+        </div>
+        <div class="stack-row">
+          <span class="badge">Python</span><span class="badge">arch</span>
+          <span class="badge">SciPy</span><span class="badge">uv</span><span class="badge">Pytest</span>
+        </div>
+        <p class="value-callout">
+          Forecasts Value-at-Risk and Expected Shortfall for Nordic day-ahead electricity prices under
+          negative-price regimes, giving risk desks a statistically defensible early-warning system worth
+          <!-- TODO: insert metric -->[Insert % metric] in avoided capital misallocation.
+        </p>
+        <ul>
+          <li>Fitted a GJR-GARCH(1,1,1) volatility filter with Student-t innovations, resolving an optimizer underflow bug that silently broke convergence at realistic price scales.</li>
+          <li>Implemented a Peaks-Over-Threshold GARCH-EVT pipeline (McNeil &amp; Frey) with rolling out-of-sample validation via Kupiec, Christoffersen, and Acerbi-Szekely tests.</li>
+          <li>Diagnosed and fixed a zero-violation Kupiec test bypass and removed a statistically indefensible pass/fail heuristic, replacing both with closed-form, peer-reviewed test statistics.</li>
+        </ul>
+      </article>
+
+      <!-- Project 4 -->
+      <article class="project-card">
+        <div class="project-top">
+          <span class="project-id">P04</span>
+          <h3>Spatial Multi-Omics Integration</h3>
+        </div>
+        <div class="stack-row">
+          <span class="badge">Python</span><span class="badge">R</span>
+          <span class="badge">Scanpy</span><span class="badge">rpy2</span>
+          <span class="badge">Docker</span><span class="badge">Streamlit</span>
+        </div>
+        <p class="value-callout">
+          Maps predicted cell-state probabilities directly onto tumor histology images, giving researchers an
+          interactive tool to localize invasive cell populations and accelerate hypothesis generation by
+          <!-- TODO: insert metric -->[Insert % metric].
+        </p>
+        <ul>
+          <li>Built a polyglot Python/R integration bridge (rpy2) to orchestrate Iterative Clustering Projection against 10x Genomics Visium spatial transcriptomics data.</li>
+          <li>Engineered a QC and normalization pipeline with mitochondrial filtering and highly-variable-gene selection to safeguard downstream differential expression validity.</li>
+          <li>Shipped a multi-stage Docker build coupling a frozen R runtime with uv-managed Python dependencies, gated behind a Makefile artifact-dependency check for reproducible deployment.</li>
+        </ul>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER / CONTACT ============ -->
+<footer id="contact">
+  <div class="wrap footer-inner">
+    <div>
+      <div class="logo" style="margin-bottom:8px;">[YN]<span>_</span></div>
+      <div class="footer-note">© <span id="year"></span> [Your Name]. Built with rigor, shipped with Docker.</div>
+    </div>
+    <div class="footer-icons">
+      <a href="[GitHub URL]" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+      <a href="[LinkedIn URL]" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+      <a href="mailto:[your@email.com]" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
