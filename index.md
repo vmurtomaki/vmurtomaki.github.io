@@ -403,7 +403,7 @@
 
 <header>
   <nav>
-    <div class="logo">[YN]<span>_</span></div>
+    <div class="logo">[VM]<span>_</span></div>
     <div class="nav-links">
       <a href="#skills">Skills</a>
       <a href="#projects">Projects</a>
@@ -430,7 +430,7 @@
 
   <div class="wrap hero-inner">
     <div class="eyebrow">status: production &nbsp;//&nbsp; typed · tested · containerized</div>
-    <h1 class="name"><Valtteri Murtomäki</h1>
+    <h1 class="name">Valtteri Murtomäki</h1>
     <div class="hero-role">Data Scientist &amp; Statistician</div>
     <p class="hero-desc">
       Builds where rigorous mathematical modeling meets production-grade software
@@ -632,7 +632,7 @@
 <footer id="contact">
   <div class="wrap footer-inner">
     <div>
-      <div class="logo" style="margin-bottom:8px;">[YN]<span>_</span></div>
+      <div class="logo" style="margin-bottom:8px;">[VM]<span>_</span></div>
       <div class="footer-note">© <span id="year"></span> [Your Name]. Built with rigor, shipped with Docker.</div>
     </div>
     <div class="footer-icons">
