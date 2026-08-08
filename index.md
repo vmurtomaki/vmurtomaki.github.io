@@ -437,7 +437,7 @@
       engineering. From Double Machine Learning causal estimators to GARCH-EVT
       tail-risk models, every project ships as a typed, tested, containerized
       system — not a notebook. Explore the full body of work on
-      <a href="[GitHub URL]" target="_blank" rel="noopener">GitHub</a>.
+      <a href="https://github.com/vmurtomaki" target="_blank" rel="noopener">GitHub</a>.
     </p>
     <div class="cta-row">
       <a class="btn primary" href="https://github.com/vmurtomaki/" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>
@@ -635,9 +635,8 @@
       <div class="footer-note">© <span id="year"></span> [Your Name]. Built with rigor, shipped with Docker.</div>
     </div>
     <div class="footer-icons">
-      <a href="[GitHub URL]" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-      <a href="[LinkedIn URL]" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-      <a href="mailto:[your@email.com]" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+      <a href="https://github.com/vmurtomaki" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+      <a href="valtteri.murtomaki@outlook.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
     </div>
   </div>
 </footer>
