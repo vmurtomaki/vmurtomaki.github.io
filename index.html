@@ -573,25 +573,27 @@
         <div class="project-top">
           <div class="project-top-left">
             <span class="project-id">P03</span>
-            <h3>GARCH-EVT Risk Engine</h3>
+            <h3>GARCH-EVT Risk Engine — Azure Production Pipeline</h3>
           </div>
-          <a class="repo-link" href="https://github.com/vmurtomaki/evt-nordic-energy-risk" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> View repo</a>
+          <a class="repo-link" href="https://github.com/vmurtomaki/nordic-grid-data-pipeline" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> View repo</a>
         </div>
         <div class="stack-row">
-          <span class="badge">Python</span><span class="badge">arch</span>
-          <span class="badge">SciPy</span><span class="badge">uv</span><span class="badge">Pytest</span>
+          <span class="badge">Azure SQL</span><span class="badge">Terraform</span>
+          <span class="badge">GitHub Actions OIDC</span><span class="badge">Pandera</span>
+          <span class="badge">arch</span><span class="badge">SciPy</span>
         </div>
         <p class="value-callout">
-          Forecasts Value-at-Risk and Expected Shortfall for Nordic day-ahead electricity prices under
-          negative-price regimes — an out-of-sample Kupiec backtest correctly <strong>flagged a live under-coverage
-          event</strong> (8 actual VaR breaches vs. 2.44 theoretically expected at 99% confidence, p = 0.0047),
-          demonstrating a validation layer that catches miscalibrated tail-risk forecasts instead of taking a
-          single VaR estimate on faith.
+          Forecasts Value-at-Risk and Expected Shortfall for Nordic day-ahead electricity prices and runs
+          it as a scheduled, self-healing Azure pipeline — an out-of-sample Kupiec backtest correctly
+          <strong>flagged a live under-coverage event</strong> (8 actual VaR breaches vs. 2.44 theoretically
+          expected at 99% confidence, p = 0.0047), the kind of miscalibration a validation layer needs to
+          catch before a desk trusts the number.
         </p>
         <ul>
-          <li>Fitted a GJR-GARCH(1,1,1) volatility filter with Student-t innovations, resolving an optimizer underflow bug that silently broke convergence at realistic price scales.</li>
-          <li>Implemented a Peaks-Over-Threshold GARCH-EVT pipeline (McNeil &amp; Frey) with rolling out-of-sample validation via Kupiec, Christoffersen, and Acerbi-Szekely tests.</li>
-          <li>Diagnosed and fixed a zero-violation Kupiec test bypass and removed a statistically indefensible pass/fail heuristic, replacing both with closed-form, peer-reviewed test statistics.</li>
+          <li>Re-architected a local research pipeline into a passwordless, zero-secret Azure deployment: Terraform-provisioned Azure SQL Serverless, Blob-backed remote state, and GitHub Actions authenticated entirely via OIDC federated credentials.</li>
+          <li>Built an idempotent ingestion layer (staging table + T-SQL <code>MERGE</code>) with Pandera contracts enforcing gapless, timezone-aware hourly data — with exponential backoff to survive Azure SQL Serverless cold starts (error 40613).</li>
+          <li>Fitted a rolling GJR-GARCH(1,1,1) + Peaks-Over-Threshold EVT engine with daily automated Kupiec, Christoffersen, and Acerbi-Szekely backtests; the pipeline hard-fails on data gaps or convergence errors rather than silently dropping days.</li>
+          <li>Diagnosed and resolved three distinct Azure/ODBC/SQLAlchemy production issues (OIDC subject-claim mismatch, driver auth keyword collision, SQL type inference bug) — documented in a running devlog.</li>
         </ul>
       </article>
     </div>
