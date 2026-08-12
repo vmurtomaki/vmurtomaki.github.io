@@ -583,11 +583,12 @@
           <span class="badge">arch</span><span class="badge">SciPy</span>
         </div>
         <p class="value-callout">
-          Forecasts Value-at-Risk and Expected Shortfall for Nordic day-ahead electricity prices and runs
-          it as a scheduled, self-healing Azure pipeline — an out-of-sample Kupiec backtest correctly
-          <strong>flagged a live under-coverage event</strong> (8 actual VaR breaches vs. 2.44 theoretically
-          expected at 99% confidence, p = 0.0047), the kind of miscalibration a validation layer needs to
-          catch before a desk trusts the number.
+          Forecasts Value-at-Risk and Expected Shortfall for <strong>Nord Pool day-ahead electricity
+          prices (FI bidding zone)</strong>, provisioned as a passwordless, self-healing Azure pipeline
+          via Terraform and OIDC — an out-of-sample Kupiec backtest correctly <strong>flagged a live
+          under-coverage event</strong> (8 actual VaR breaches vs. 2.44 theoretically expected at 99%
+          confidence, p = 0.0047), the kind of miscalibration a validation layer needs to catch before
+          a desk trusts the number.
         </p>
         <ul>
           <li>Re-architected a local research pipeline into a passwordless, zero-secret Azure deployment: Terraform-provisioned Azure SQL Serverless, Blob-backed remote state, and GitHub Actions authenticated entirely via OIDC federated credentials.</li>
