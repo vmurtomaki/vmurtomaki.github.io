@@ -333,15 +333,32 @@
     border-radius:4px;
     background:var(--bg-alt);
   }
+  /* Plain-language outcome line — first thing a non-technical reader hits */
+  .outcome{
+    font-size:16.5px;
+    line-height:1.55;
+    color:var(--text);
+    max-width:64ch;
+    margin-bottom:20px;
+  }
+  .outcome::before{
+    content:"What it's for";
+    display:block;
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--text-faint);
+    margin-bottom:7px;
+  }
   .value-callout{
     font-family:var(--serif);
     font-style:italic;
     font-size:15.5px;
-    color:var(--text);
+    color:#D7DEE6;
     border-left:2px solid var(--accent);
     padding:4px 0 4px 18px;
     margin-bottom:22px;
-    color:#D7DEE6;
   }
   .project-card ul{
     list-style:none;
@@ -425,10 +442,10 @@
     <h1 class="name">Valtteri Murtomäki</h1>
     <div class="hero-role">Data Scientist &amp; Statistician</div>
     <p class="hero-desc">
-      Builds where rigorous mathematical modeling meets production-grade software
-      engineering. From Double Machine Learning causal estimators to GARCH-EVT
-      tail-risk models, every project ships as a typed, tested, containerized
-      system — not a notebook. Explore the full body of work on
+      I build statistical models that answer decisions, not just questions: what a price
+      change really costs in sales, how wrong a demand forecast could be, how bad a bad day
+      on electricity prices gets. Each one ships as a typed, tested, containerized system —
+      not a notebook. Full body of work on
       <a href="https://github.com/vmurtomaki" target="_blank" rel="noopener">GitHub</a>.
     </p>
     <div class="cta-row">
@@ -528,6 +545,11 @@
           <span class="badge">LightGBM</span><span class="badge">Streamlit</span>
           <span class="badge">uv</span><span class="badge">Pytest</span><span class="badge">MyPy</span>
         </div>
+        <p class="outcome">
+          Tells a pricing team what a price change would actually cost them in sales, separating real
+          customer response from the brand loyalty and competitor discounting that make raw sales data
+          misleading — and lets them test a scenario in a dashboard before committing to it.
+        </p>
         <p class="value-callout">
           Identifies the true causal effect of pricing on purchase probability by stripping high-dimensional
           confounding from observational retail data — estimating a statistically significant
@@ -555,6 +577,11 @@
           <span class="badge">Docker</span><span class="badge">Plotly</span>
           <span class="badge">uv</span><span class="badge">Pytest</span>
         </div>
+        <p class="outcome">
+          Turns a single-number electricity demand forecast into an honest best-case/worst-case range that
+          planners can size capacity and hedging decisions against — one that tightens or widens on its own
+          when demand becomes volatile, instead of quietly going stale.
+        </p>
         <p class="value-callout">
           Delivers mathematically guaranteed prediction intervals for volatile energy demand series — the
           Adaptive Conformal Inference layer tracks the target 90% coverage rate to within
@@ -582,6 +609,11 @@
           <span class="badge">GitHub Actions OIDC</span><span class="badge">Pandera</span>
           <span class="badge">arch</span><span class="badge">SciPy</span>
         </div>
+        <p class="outcome">
+          Runs unattended every day to answer one question for anyone exposed to Finnish electricity prices —
+          how bad could a bad day get — and refuses to publish a number when the data is incomplete or the
+          model has stopped tracking reality.
+        </p>
         <p class="value-callout">
           Forecasts Value-at-Risk and Expected Shortfall for <strong>Nord Pool day-ahead electricity
           prices (FI bidding zone)</strong>, provisioned as a passwordless, self-healing Azure pipeline
