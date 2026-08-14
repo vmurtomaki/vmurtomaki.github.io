@@ -617,10 +617,12 @@
         <p class="value-callout">
           Forecasts Value-at-Risk and Expected Shortfall for <strong>Nord Pool day-ahead electricity
           prices (FI bidding zone)</strong>, provisioned as a passwordless, self-healing Azure pipeline
-          via Terraform and OIDC — an out-of-sample Kupiec backtest correctly <strong>flagged a live
-          under-coverage event</strong> (8 actual VaR breaches vs. 2.44 theoretically expected at 99%
-          confidence, p = 0.0047), the kind of miscalibration a validation layer needs to catch before
-          a desk trusts the number.
+          via Terraform and OIDC — and caught its own miscalibration before it could reach a user.
+          An early out-of-sample Kupiec backtest correctly flagged under-coverage (8 breaches vs.
+          2.44 expected at 99% confidence, p = 0.0047); root-causing it to a KS-based threshold
+          selector blind in the tail led to a parameter-stability selection method that resolved
+          <strong>282/282 rolling fits with zero fallbacks</strong> and restored coverage
+          (p = 0.5064) — documented end to end in the <a href="https://github.com/vmurtomaki/nordic-grid-data-pipeline/blob/main/devlog.md" target="_blank" rel="noopener">project devlog</a>.
         </p>
         <ul>
           <li>Re-architected a local research pipeline into a passwordless, zero-secret Azure deployment: Terraform-provisioned Azure SQL Serverless, Blob-backed remote state, and GitHub Actions authenticated entirely via OIDC federated credentials.</li>
