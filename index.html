@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Valtteri Murtomäki — Quantitative Analyst</title>
-<meta name="description" content="Data Scientist and Statistician working at the intersection of rigorous mathematical modeling and production-grade software engineering.">
+<meta name="description" content="Statistician building tail-risk, causal, and forecasting models as tested, deployed systems.">
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -447,6 +447,10 @@
       on electricity prices gets. Each one ships as a typed, tested, containerized system —
       not a notebook.
     </p>
+    <p class="hero-desc">
+      Statistician (M.Sc., Turku 2026). Previously ran regulated cold-chain logistics — where
+      the habit of building systems that fail loudly came from.
+    </p>
     <div class="cta-row">
       <a class="btn primary" href="https://github.com/vmurtomaki" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>
       <a class="btn" href="mailto:valtteri.murtomaki@outlook.com"><i class="fa-solid fa-envelope"></i> Email</a>
@@ -500,7 +504,7 @@
     <div class="section-head">
       <div class="eyebrow">// case studies</div>
       <h2>Selected Work</h2>
-      <p>Three projects spanning causal inference, uncertainty quantification, and tail-risk forecasting.</p>
+      <p>Three projects spanning tail-risk forecasting, causal inference, and prediction intervals.</p>
     </div>
     <div class="project-list">
       <!-- Project 1 -->
@@ -508,6 +512,40 @@
         <div class="project-top">
           <div class="project-top-left">
             <span class="project-id">P01</span>
+            <h3>GARCH-EVT Risk Engine — Azure Production Pipeline</h3>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <a class="repo-link" href="https://github.com/vmurtomaki/nordic-grid-data-pipeline" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> View repo</a>
+            <a class="repo-link" href="https://github.com/vmurtomaki/nordic-grid-data-pipeline/blob/main/devlog.md" target="_blank" rel="noopener"><i class="fa-solid fa-book-open"></i> Read devlog</a>
+          </div>
+        </div>
+        <div class="stack-row">
+          <span class="badge">Azure SQL</span><span class="badge">Terraform</span>
+          <span class="badge">GitHub Actions OIDC</span><span class="badge">Pandera</span>
+          <span class="badge">arch</span><span class="badge">SciPy</span>
+        </div>
+        <p class="outcome">
+          Runs unattended every day to answer one question for anyone exposed to Finnish electricity prices —
+          how bad could a bad day get — and refuses to publish a number when the data is incomplete or the
+          model has stopped tracking reality.
+        </p>
+        <p class="value-callout">
+          The first out-of-sample backtest rejected 99% coverage — 8 breaches against 2.44 expected,
+          Kupiec p = 0.0047 — and stopped a miscalibrated forecast before it was published.
+        </p>
+        <ul>
+          <li>That fix changed four things at once (threshold selector, rolling window, exceedance floor, evaluation period). A later ablation cleared the selector and the floor and identified window length as the operative variable — the original attribution was wrong. Both the failure and the correction are in the <a href="https://github.com/vmurtomaki/nordic-grid-data-pipeline/blob/main/devlog.md" target="_blank" rel="noopener">devlog</a>.</li>
+          <li>Rebuilt a local research pipeline as a passwordless, zero-secret Azure deployment: Terraform-provisioned Azure SQL Serverless, Blob-backed remote state, GitHub Actions authenticated via OIDC federated credentials.</li>
+          <li>Built an idempotent ingestion layer (staging table + T-SQL <code>MERGE</code>) with Pandera contracts enforcing a gapless, timezone-aware hourly index, and exponential backoff to survive Azure SQL Serverless cold starts (error 40613).</li>
+          <li>Fitted a rolling GJR-GARCH(1,1,1) + Peaks-Over-Threshold EVT engine with daily Kupiec POF, Christoffersen independence, and Acerbi–Székely backtests; the pipeline halts on data gaps or convergence failures rather than silently dropping days.</li>
+          <li>Fixed three Azure/ODBC/SQLAlchemy production issues: OIDC subject-claim mismatch, driver auth keyword collision, SQL type inference on tz-aware timestamps.</li>
+        </ul>
+      </article>
+      <!-- Project 2 -->
+      <article class="project-card">
+        <div class="project-top">
+          <div class="project-top-left">
+            <span class="project-id">P02</span>
             <h3>Causal Pricing Engine</h3>
           </div>
           <a class="repo-link" href="https://github.com/vmurtomaki/causal_inference" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> View repo</a>
@@ -523,24 +561,25 @@
           misleading — and lets them test a scenario in a dashboard before committing to it.
         </p>
         <p class="value-callout">
-          Identifies the true causal effect of pricing on purchase probability by stripping high-dimensional
-          confounding from observational retail data — a 10-cent price increase lowers purchase probability by
-          <strong>~5.6 percentage points</strong> (θ₀ = -0.5570, p = 1.79 x 10⁻⁸; a local slope, not a
-          dollar-scale extrapolation — observed prices span $1.69-$2.09), robust to unobserved confounders
-          explaining up to <strong>~14.9%</strong> of residual treatment variance before the effect is nulled.
+          A 10-cent increase in sale price lowers the probability of choosing the brand by
+          <strong>~5.6 percentage points</strong> (θ̂₀ = −0.5570, p &lt; 0.001), holding loyalty and
+          competitor price fixed.
         </p>
         <ul>
-          <li>Engineered a Partially Linear Regression estimator with LightGBM nuisance learners and cross-fitting to recover orthogonal, bias-resistant causal effects.</li>
-          <li>Quantified estimator fragility with Omitted Variable Bias sensitivity bounds, exposing exactly how much unobserved confounding the causal claim could tolerate.</li>
-          <li>Architected a strictly typed <code>src/</code> layout with deterministic uv locking, Ruff/MyPy CI gates, and a Streamlit scenario simulator serving live pipeline artifacts.</li>
+          <li>Read as a local slope, not a dollar-scale prediction: observed prices span $1.69–$2.09, so a full $1.00 move is outside the support of the data.</li>
+          <li>Omitted-variable-bias sensitivity puts the robustness value at ~14.9% — more than any single observed covariate explains — so the sign and rough magnitude survive plausible unobserved confounding.</li>
+          <li>Observations cluster by store and week but the model was fitted with i.i.d. standard errors, so the p-value is understated; the point estimate is the defensible quantity.</li>
+          <li>Estimated the effect with a partially linear DML model — LightGBM nuisance learners, 5-fold cross-fitting — excluding <code>PriceCH</code> and <code>SpecialCH</code>, which would destroy the treatment variation the orthogonal score depends on.</li>
+          <li>Built a typed <code>src/</code> layout with uv locking, Ruff/MyPy CI gates, and a Streamlit simulator that reads the pipeline artifact rather than refitting.</li>
         </ul>
       </article>
-      <!-- Project 2 -->
+      <!-- Project 3 -->
       <article class="project-card">
         <div class="project-top">
           <div class="project-top-left">
-            <span class="project-id">P02</span>
+            <span class="project-id">P03</span>
             <h3>Adaptive Conformal Forecasting</h3>
+            <span class="badge">Distribution-free prediction intervals for volatile time series</span>
           </div>
           <a class="repo-link" href="https://github.com/vmurtomaki/conformal-prediction-project" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> View repo</a>
         </div>
@@ -555,49 +594,15 @@
           when demand becomes volatile, instead of quietly going stale.
         </p>
         <p class="value-callout">
-          Delivers mathematically guaranteed prediction intervals for volatile energy demand series — the
-          Adaptive Conformal Inference layer tracks the target 90% coverage rate to within
-          <strong>0.4 percentage points</strong> empirically, versus a <strong>2.7-point</strong> excess-conservatism
-          gap for a static conformal baseline, trading band width for a tighter, more honest read on realized risk
-          instead of defaulting to blanket over-coverage.
+          On 1,500 held-out hours at a 90% target, the adaptive layer covered <strong>89.9%</strong> with
+          intervals <strong>7.5% narrower</strong> than a static conformal baseline that over-covered at 92.7%.
         </p>
         <ul>
-          <li>Implemented EnbPI with block-bootstrap residuals to preserve chronological exchangeability where standard conformal methods break down on time series.</li>
-          <li>Corrected a coarse-grained Adaptive Conformal Inference update to a per-timestep Gibbs &amp; Candes formulation, restoring true reactivity to regime shifts and shocks.</li>
-          <li>Containerized the full inference stack with Docker and validated it end-to-end via an automated smoke-test script covering builds, health checks, and live serving.</li>
-        </ul>
-      </article>
-      <!-- Project 3 -->
-      <article class="project-card">
-        <div class="project-top">
-          <div class="project-top-left">
-            <span class="project-id">P03</span>
-            <h3>GARCH-EVT Risk Engine — Azure Production Pipeline</h3>
-          </div>
-          <a class="repo-link" href="https://github.com/vmurtomaki/nordic-grid-data-pipeline" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> View repo</a>
-        </div>
-        <div class="stack-row">
-          <span class="badge">Azure SQL</span><span class="badge">Terraform</span>
-          <span class="badge">GitHub Actions OIDC</span><span class="badge">Pandera</span>
-          <span class="badge">arch</span><span class="badge">SciPy</span>
-        </div>
-        <p class="outcome">
-          Runs unattended every day to answer one question for anyone exposed to Finnish electricity prices —
-          how bad could a bad day get — and refuses to publish a number when the data is incomplete or the
-          model has stopped tracking reality.
-        </p>
-        <p class="value-callout">
-          An early out-of-sample Kupiec backtest flagged under-coverage (8 breaches vs. 2.44
-          expected at 99% confidence, p = 0.0047), halting a miscalibrated forecast before
-          publication. The subsequent fix changed both a threshold-stability criterion and the
-          estimation window; the arms are confounded and I have not isolated which was
-          responsible — documented end to end in the <a href="https://github.com/vmurtomaki/nordic-grid-data-pipeline/blob/main/devlog.md" target="_blank" rel="noopener">project devlog</a>.
-        </p>
-        <ul>
-          <li>Re-architected a local research pipeline into a passwordless, zero-secret Azure deployment: Terraform-provisioned Azure SQL Serverless, Blob-backed remote state, and GitHub Actions authenticated entirely via OIDC federated credentials.</li>
-          <li>Built an idempotent ingestion layer (staging table + T-SQL <code>MERGE</code>) with Pandera contracts enforcing gapless, timezone-aware hourly data — with exponential backoff to survive Azure SQL Serverless cold starts (error 40613).</li>
-          <li>Fitted a rolling GJR-GARCH(1,1,1) + Peaks-Over-Threshold EVT engine with daily automated Kupiec POF, Christoffersen independence, and Acerbi–Székely backtests; the pipeline hard-fails on data gaps or convergence errors rather than silently dropping days.</li>
-          <li>Diagnosed and resolved three distinct Azure/ODBC/SQLAlchemy production issues (OIDC subject-claim mismatch, driver auth keyword collision, SQL type inference bug) — documented in a running devlog.</li>
+          <li>The γ sweep behind that default was run on the same held-out window the numbers are reported on, so the width reduction is optimistically biased; a three-way split is the first structural fix.</li>
+          <li>Above γ ≈ 0.03 the update overshoots after miscoverage events — coverage still tracks 90%, but mean width inflates sharply (47% wider than static at γ = 0.05).</li>
+          <li>Implemented EnbPI with block-bootstrap residuals, which holds under sequential dependence where standard conformal exchangeability does not.</li>
+          <li>Fixed an ACI update that ran once per 168-hour chunk instead of per timestep — roughly two orders of magnitude less reactive than the Gibbs &amp; Candès formulation intends.</li>
+          <li>Containerized the inference stack with Docker and covered build, health check, and serving in one end-to-end smoke-test script.</li>
         </ul>
       </article>
     </div>
