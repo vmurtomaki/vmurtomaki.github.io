@@ -587,17 +587,16 @@
           model has stopped tracking reality.
         </p>
         <p class="value-callout">
-          An early out-of-sample Kupiec backtest correctly flagged under-coverage (8 breaches vs.
-          2.44 expected at 99% confidence, p = 0.0047); root-causing it to a KS-based threshold
-          selector blind in the tail led to a parameter-stability selection method that resolved
-          <strong>282/282 rolling fits with zero fallbacks</strong> and restored coverage
-          (p = 0.5064 — different evaluation period than the original run; not a controlled
-          before/after, see devlog) — documented end to end in the <a href="https://github.com/vmurtomaki/nordic-grid-data-pipeline/blob/main/devlog.md" target="_blank" rel="noopener">project devlog</a>.
+          An early out-of-sample Kupiec backtest flagged under-coverage (8 breaches vs. 2.44
+          expected at 99% confidence, p = 0.0047), halting a miscalibrated forecast before
+          publication. The subsequent fix changed both a threshold-stability criterion and the
+          estimation window; the arms are confounded and I have not isolated which was
+          responsible — documented end to end in the <a href="https://github.com/vmurtomaki/nordic-grid-data-pipeline/blob/main/devlog.md" target="_blank" rel="noopener">project devlog</a>.
         </p>
         <ul>
           <li>Re-architected a local research pipeline into a passwordless, zero-secret Azure deployment: Terraform-provisioned Azure SQL Serverless, Blob-backed remote state, and GitHub Actions authenticated entirely via OIDC federated credentials.</li>
           <li>Built an idempotent ingestion layer (staging table + T-SQL <code>MERGE</code>) with Pandera contracts enforcing gapless, timezone-aware hourly data — with exponential backoff to survive Azure SQL Serverless cold starts (error 40613).</li>
-          <li>Fitted a rolling GJR-GARCH(1,1,1) + Peaks-Over-Threshold EVT engine with daily automated Kupiec, Christoffersen, and Acerbi-Szekely backtests; the pipeline hard-fails on data gaps or convergence errors rather than silently dropping days.</li>
+          <li>Fitted a rolling GJR-GARCH(1,1,1) + Peaks-Over-Threshold EVT engine with daily automated Kupiec POF, Christoffersen independence, and Acerbi–Székely backtests; the pipeline hard-fails on data gaps or convergence errors rather than silently dropping days.</li>
           <li>Diagnosed and resolved three distinct Azure/ODBC/SQLAlchemy production issues (OIDC subject-claim mismatch, driver auth keyword collision, SQL type inference bug) — documented in a running devlog.</li>
         </ul>
       </article>
