@@ -594,20 +594,21 @@
           <span class="badge">uv</span><span class="badge">Pytest</span>
         </div>
         <p class="outcome">
-          Turns a single-number electricity demand forecast into an honest best-case/worst-case range that
-          planners can size capacity and hedging decisions against — one that tightens or widens on its own
-          when demand becomes volatile, instead of quietly going stale.
+          Turns a single-number electricity demand forecast into a 90% prediction interval — the band the
+          outcome falls inside nine hours in ten, not a best case or a worst case — that planners can size
+          capacity and hedging decisions against. The band recalibrates itself against realized coverage as
+          the series shifts regime, instead of holding a width that stopped being correct.
         </p>
         <p class="value-callout">
           On 1,500 held-out hours at a 90% target, the adaptive layer covered <strong>89.9%</strong> with
           intervals <strong>7.5% narrower</strong> than a static conformal baseline that over-covered at 92.7%.
         </p>
         <ul>
-          <li>The γ sweep behind that default was run on the same held-out window the numbers are reported on, so the width reduction is optimistically biased; a three-way split is the first structural fix.</li>
-          <li>Above γ ≈ 0.03 the update overshoots after miscoverage events — coverage still tracks 90%, but mean width inflates sharply (47% wider than static at γ = 0.05).</li>
-          <li>Implemented EnbPI with block-bootstrap residuals, which holds under sequential dependence where standard conformal exchangeability does not.</li>
-          <li>Fixed an ACI update that ran once per 168-hour chunk instead of per timestep — roughly two orders of magnitude less reactive than the Gibbs &amp; Candès formulation intends.</li>
-          <li>Containerized the inference stack with Docker and covered build, health check, and serving in one end-to-end smoke-test script.</li>
+          <li>Reported with its resolution: at n = 1,500 the binomial SE on coverage is ≈0.8 pp before correcting for serially dependent misses, so 89.9% is indistinguishable from the 90% target — the separation from 92.7% is the informative comparison, not the last decimal.</li>
+          <li>The γ sweep behind that default was run on the same held-out window the numbers are reported on, so the width reduction is optimistically biased; a three-way split is the first structural fix. γ = 0.005 gave a larger reduction (10.9%) than the chosen 0.01, so the default is a judgment call on adaptation speed rather than an optimum the sweep establishes.</li>
+          <li>Above γ ≈ 0.03 the update overshoots after miscoverage events — coverage still tracks 90%, but mean width inflates sharply (47% wider than static at γ = 0.05).</li>          <li>Applied EnbPI with block-bootstrap residuals (MAPIE) in place of split conformal — a weaker assumption, not no assumption: coverage becomes approximate and asymptotic under stationarity and mixing conditions rather than finite-sample under exchangeability.</li>
+          <li>Fixed an ACI update that ran once per 168-hour chunk on the chunk's aggregate error rate instead of per timestep — roughly two orders of magnitude coarser than the Gibbs &amp; Candès recursion. The α path is now per-step; the emitted band stays piecewise-constant over the batching interval, so the displayed interval is a downsampled view of it.</li>
+          <li>Containerized the stack with Docker and wrote one end-to-end validation script covering install, tests, lint, image build, and container health check.</li>
         </ul>
       </article>
     </div>
