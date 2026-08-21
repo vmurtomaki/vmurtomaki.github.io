@@ -559,21 +559,23 @@
           <span class="badge">uv</span><span class="badge">Pytest</span><span class="badge">MyPy</span>
         </div>
         <p class="outcome">
-          Tells a pricing team what a price change would actually cost them in sales, separating real
-          customer response from the brand loyalty and competitor discounting that make raw sales data
-          misleading — and lets them test a scenario in a dashboard before committing to it.
+          Tells a pricing team how much of their brand's share a price change would actually move,
+          separating real customer response from the brand loyalty and competitor discounting that make
+          raw sales data misleading — and lets them test a scenario in a dashboard before committing.
         </p>
         <p class="value-callout">
           A 10-cent increase in sale price lowers the probability of choosing the brand by
-          <strong>~5.6 percentage points</strong> (θ̂₀ = −0.5570, p &lt; 0.001), holding loyalty and
-          competitor price fixed.
+          <strong>~4.6 percentage points</strong> (θ̂₀ = −0.460, p &lt; 0.001), holding loyalty and
+          competitor price and promotion fixed. Estimated on a linear probability scale, so this is a
+          local slope, not a calibrated probability model.
         </p>
         <ul>
-          <li>Read as a local slope, not a dollar-scale prediction: observed prices span $1.69–$2.09, so a full $1.00 move is outside the support of the data.</li>
-          <li>Omitted-variable-bias sensitivity puts the robustness value at ~14.9% — more than any single observed covariate explains — so the sign and rough magnitude survive plausible unobserved confounding.</li>
+          <li>Read as a local slope, not a dollar-scale prediction: the treatment (sale price) spans $1.39–$2.09, so a full $1.00 move is outside the support of the data.</li>
+          <li>Omitted-variable-bias sensitivity puts the robustness value at 12.3%: at worst-case alignment, an unobserved confounder would need to explain ~12.3% of residual variance in both treatment and outcome to null the point estimate — 8.1% to null significance. Not yet benchmarked against the observed covariates, so it bounds fragility without establishing that no such confounder exists.</li>
           <li>Observations cluster by store and week but the model was fitted with i.i.d. standard errors, so the p-value is understated; the point estimate is the defensible quantity.</li>
-          <li>Estimated the effect with a partially linear DML model — LightGBM nuisance learners, 5-fold cross-fitting — excluding <code>PriceCH</code> and <code>SpecialCH</code>, which would destroy the treatment variation the orthogonal score depends on.</li>
-          <li>Built a typed <code>src/</code> layout with uv locking, Ruff/MyPy CI gates, and a Streamlit simulator that reads the pipeline artifact rather than refitting.</li>
+          <li>Estimated the effect with a partially linear DML model on the partialling-out score — LightGBM nuisance learners, 5 folds × 5 repetitions. <code>PriceCH</code> and <code>SpecialCH</code> are excluded together: sale price is list price minus discount, and the discount is near-zero absent a promotion, so conditioning on both leaves almost no residual treatment variation. The cost is that list-price level goes uncontrolled — a stated trade-off, not a free lunch.</li>
+          <li>Validated the estimator against a synthetic design with known θ₀ and a second with an analytically derived omitted-variable bias, both asserted in CI alongside Ruff, MyPy (strict), and a locked dependency graph.</li>
+          <li>Built a typed <code>src/</code> layout with a Streamlit simulator that reads the pipeline artifact rather than refitting.</li>
         </ul>
       </article>
       <!-- Project 3 -->
