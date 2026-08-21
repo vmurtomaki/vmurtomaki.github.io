@@ -512,7 +512,7 @@
         <div class="project-top">
           <div class="project-top-left">
             <span class="project-id">P01</span>
-            <h3>GARCH-EVT Risk Engine — Azure Production Pipeline</h3>
+            <h3>GARCH-EVT Risk Engine — Scheduled Azure Deployment</h3>
           </div>
           <div style="display:flex;gap:8px;flex-wrap:wrap;">
             <a class="repo-link" href="https://github.com/vmurtomaki/nordic-grid-data-pipeline" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> View repo</a>
@@ -526,18 +526,21 @@
         </div>
         <p class="outcome">
           Runs unattended every day to answer one question for anyone exposed to Finnish electricity prices —
-          how bad could a bad day get — and refuses to publish a number when the data is incomplete or the
-          model has stopped tracking reality.
+          how bad could a bad day get — and halts rather than publishing when the input series has a gap it
+          cannot defensibly fill or the volatility model fails to converge.
         </p>
         <p class="value-callout">
           The first out-of-sample backtest rejected 99% coverage — 8 breaches against 2.44 expected,
-          Kupiec p = 0.0047 — and stopped a miscalibrated forecast before it was published.
+          Kupiec p = 0.0047 — and the forecast was withheld. On the current pinned range: 14 breaches
+          against 14.05 expected at 95% over 281 days (Kupiec p = 0.99), with the 99% level reported
+          alongside its power caveat rather than as confirmation.
         </p>
         <ul>
-          <li>That fix changed four things at once (threshold selector, rolling window, exceedance floor, evaluation period). A later ablation cleared the selector and the floor and identified window length as the operative variable — the original attribution was wrong. Both the failure and the correction are in the <a href="https://github.com/vmurtomaki/nordic-grid-data-pipeline/blob/main/devlog.md" target="_blank" rel="noopener">devlog</a>.</li>
+          <li>That fix changed four things at once (threshold selector, rolling window, exceedance floor, evaluation period). A later ablation cleared the selector and the floor; window length and evaluation period remain confounded, and cannot be separated because the 2023 range no longer exists upstream. The original single-cause attribution was wrong, and its replacement is narrower rather than conclusive. Both the failure and the correction are in the <a href="https://github.com/vmurtomaki/nordic-grid-data-pipeline/blob/main/devlog.md" target="_blank" rel="noopener">devlog</a>.</li>
           <li>Rebuilt a local research pipeline as a passwordless, zero-secret Azure deployment: Terraform-provisioned Azure SQL Serverless, Blob-backed remote state, GitHub Actions authenticated via OIDC federated credentials.</li>
           <li>Built an idempotent ingestion layer (staging table + T-SQL <code>MERGE</code>) with Pandera contracts enforcing a gapless, timezone-aware hourly index, and exponential backoff to survive Azure SQL Serverless cold starts (error 40613).</li>
-          <li>Fitted a rolling GJR-GARCH(1,1,1) + Peaks-Over-Threshold EVT engine with daily Kupiec POF, Christoffersen independence, and Acerbi–Székely backtests; the pipeline halts on data gaps or convergence failures rather than silently dropping days.</li>
+          <li>Fitted a rolling GJR-GARCH(1,1,1) + Peaks-Over-Threshold EVT engine with daily Kupiec POF and Christoffersen conditional-coverage tests, plus a raw Acerbi–Székely ES statistic that is reported rather than thresholded (it follows no standard distribution); the pipeline halts on unfillable data gaps or convergence failures rather than silently dropping days.</li>
+          <li>Benchmarked against filtered historical simulation, a GARCH-t quantile, and an unconditional empirical quantile over an identical 281-day scheme. No arm separates on coverage — including the unfiltered one — so the honest reading is that the sample lacks the power to rank them; GARCH-EVT differs only in running 10–15% more conservative at 99%.</li>
           <li>Fixed three Azure/ODBC/SQLAlchemy production issues: OIDC subject-claim mismatch, driver auth keyword collision, SQL type inference on tz-aware timestamps.</li>
         </ul>
       </article>
